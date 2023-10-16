@@ -1,0 +1,39 @@
+name: Release Workflow
+
+on:
+  push:
+    tags:
+      - "release/*"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: Determine App Type
+        id: app_type
+        run: |
+          APP_TYPE=$(echo "${{ github.ref }}" | cut -d'/' -f2)
+          echo "APP_TYPE=${APP_TYPE}" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Deploy to Vercel - Unified Web
+        if: env.APP_TYPE == 'unified-web'
+        uses: BetaHuhn/deploy-to-vercel-action@v1
+        run: |
+          echo "Unified Web released ✅ "
+        shell: bash
+
+      - name: Deploy to Vercel - Login
+        if: env.APP_TYPE == 'login'
+        run: |
+          echo "Login released ✅ "
+        shell: bash
