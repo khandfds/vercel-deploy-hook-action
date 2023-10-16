@@ -2,8 +2,12 @@ name: Release Workflow
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
   release:
-    types: created
+    types:
+      - created
 
 jobs:
   deploy:
