@@ -21,7 +21,7 @@ jobs:
       - name: Determine App Type
         id: app_type
         run: |
-          APP_TYPE=$(echo "${{ github.ref }}" | cut -d'/' -f2)
+          APP_TYPE=$(echo "${{ github.ref }}" | cut -d'/' -f4)
           echo "APP_TYPE=${APP_TYPE}" >> $GITHUB_ENV
         shell: bash
 
