@@ -1,24 +1,23 @@
 name: Release Workflow
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main
-  release:
-    types:
-      - created
+    tags:
+      - "release/*"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 18
+
       - name: Determine App Type
         id: app_type
         run: |
@@ -28,7 +27,6 @@ jobs:
 
       - name: Deploy to Vercel - Unified Web
         if: env.APP_TYPE == 'unified-web'
-        uses: BetaHuhn/deploy-to-vercel-action@v1
         run: |
           echo "Unified Web released ✅ "
         shell: bash
