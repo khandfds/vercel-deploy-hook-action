@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "public": false,
+  "git": {
+    "deploymentEnabled": {
+      "main": false,
+      "fix-test": false
+    }
+  }
+}
