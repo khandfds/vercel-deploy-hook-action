@@ -5,25 +5,46 @@ on:
     tags: ["release/*/*"]
 
 jobs:
-  deploy:
+  app-type:
+    name: Determine App types
     runs-on: ubuntu-latest
-
+    outputs:
+      app-type-id: ${{ steps.app_type.outputs.APP_TYPE }}
     steps:
       - name: Determine App Type
         id: app_type
         run: |
           APP_TYPE=$(echo "${{ github.ref }}" | cut -d'/' -f4)
-          echo "APP_TYPE=${APP_TYPE}" >> $GITHUB_ENV
+          echo "APP_TYPE=${APP_TYPE}" >> $GITHUB_OUTPUT
         shell: bash
 
+  migrate:
+    name: migration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Migrated
+        run: |
+          echo "Migrated ✅ "
+        shell: bash
+
+  unified-web:
+    name: Unified Web build
+    needs: [migrate]
+    runs-on: ubuntu-latest
+    if: ${{needs.app-type.outputs.app-type-id == 'unified-web'}}
+    steps:
       - name: Deploy to Vercel - Unified Web
-        if: env.APP_TYPE == 'unified-web'
         run: |
           echo "Unified Web released ✅ "
         shell: bash
 
+  login:
+    name: Login build
+    needs: [migrate]
+    runs-on: ubuntu-latest
+    if: ${{needs.app-type.outputs.app-type-id == 'login'}}
+    steps:
       - name: Deploy to Vercel - Login
-        if: env.APP_TYPE == 'login'
         run: |
           echo "Login released ✅ "
         shell: bash
