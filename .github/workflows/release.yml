@@ -29,7 +29,7 @@ jobs:
 
   unified-web:
     name: Unified Web build
-    needs: [migrate]
+    needs: [app-type, migrate]
     runs-on: ubuntu-latest
     if: ${{needs.app-type.outputs.app-type-id == 'unified-web'}}
     steps:
@@ -40,7 +40,7 @@ jobs:
 
   login:
     name: Login build
-    needs: [migrate]
+    needs: [app-type, migrate]
     runs-on: ubuntu-latest
     if: ${{needs.app-type.outputs.app-type-id == 'login'}}
     steps:
