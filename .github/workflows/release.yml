@@ -20,6 +20,7 @@ jobs:
 
   migrate:
     name: migration
+    needs: [app-type]
     runs-on: ubuntu-latest
     steps:
       - name: Migrated
@@ -40,7 +41,7 @@ jobs:
 
   login:
     name: Login build
-    needs: [app-type, migrate]
+    needs: [app-type]
     runs-on: ubuntu-latest
     if: ${{needs.app-type.outputs.app-type-id == 'login'}}
     steps:
