@@ -30,7 +30,7 @@ jobs:
 
   unified-web:
     name: Unified Web build
-    needs: [app-type, migrate]
+    needs: [migrate]
     runs-on: ubuntu-latest
     if: ${{needs.app-type.outputs.app-type-id == 'unified-web'}}
     steps:
