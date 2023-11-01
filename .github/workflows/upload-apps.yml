@@ -7,9 +7,6 @@ on:
     paths:
       - "src/app/test-2/**"
       - "src/app/test-3/**"
-  pull_request:
-    types:
-      - closed
 
 jobs:
   build:
