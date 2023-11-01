@@ -1,6 +1,11 @@
 name: Your Workflow Name
 
 on:
+  workflow_dispatch:
+  pull_request:
+    types: [synchronize, opened, reopened]
+    branches:
+      - main
   push:
     branches:
       - main
@@ -17,8 +22,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Your Step 1
-        run: echo "Step 1"
+      - name: Change to the app directory
+        run: |
+          cd "src/app/test-2
+          pwd
 
-      - name: Your Step 2
-        run: echo "Step 2"
+      - name: New step check pwd
+        run: pwd
