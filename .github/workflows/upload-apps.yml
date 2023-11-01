@@ -24,7 +24,7 @@ jobs:
 
       - name: Change to the app directory
         run: |
-          cd "src/app/test-2
+          cd src/app/test-2
           pwd
 
       - name: New step check pwd
