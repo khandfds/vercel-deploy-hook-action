@@ -1,0 +1,27 @@
+name: Your Workflow Name
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/app/test-2/**"
+      - "src/app/test-3/**"
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  build:
+    # if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Your Step 1
+        run: echo "Step 1"
+
+      - name: Your Step 2
+        run: echo "Step 2"
