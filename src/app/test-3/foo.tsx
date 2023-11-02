@@ -1,7 +1,7 @@
 import React from "react";
 
 const foo = () => {
-  return <div>second branch</div>;
+  return <div>something</div>;
 };
 
 export default foo;
